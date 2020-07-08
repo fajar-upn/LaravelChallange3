@@ -17,9 +17,16 @@ Route::get('/', function () {
     return view('welcomeku');
 });
 
-//pertanyaan
+//pertanyaanController
 Route::get('/pertanyaan','PertanyaanController@index');
 Route::get('/pertanyaan/create','PertanyaanController@create');
 Route::post('/pertanyaan','PertanyaanController@store');
+Route::get('/pertanyaan/{pertanyaan}','PertanyaanController@show');
+
+//jawabanController
+Route::get('/jawaban/{pertanyaan}','JawabanController@index');
+Route::get('/jawaban/create/{pertanyaan}','JawabanController@create');
+Route::post('/jawaban/{pertanyaan}','JawabanController@store');
+Route::delete('/jawaban/{petanyaan}', 'JawabanController@destroy');
 
 

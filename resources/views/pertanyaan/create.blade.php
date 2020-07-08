@@ -10,19 +10,20 @@
                 <form method="POST" action="/pertanyaan">
                 @csrf
                 <div class="form-group">
-                        <label for="title">Judul</label>
-                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Masukkan judul" name="title" value="{{old('title')}}">
-                        @error('title')
-                        <div class="invalid-feedback">{{$message}}</div>
+                        <label for="theme">Tema</label>
+                        <input type="text" class="form-control @error('theme') is-invalid @enderror" id="theme" placeholder="Masukkan tema" name="theme" value="{{old('theme')}}">
+                        @error('theme')
+                            <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
-                        <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Masukkan deskripsi" name="description" value="{{old('description')}}">
+                        <textarea type="text" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Masukkan deskripsi" name="description" value="{{old('description')}}"> </textarea>
                         @error('description')
-                        <div class="invalid-feedback">{{$message}}</div>
+                            <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
+                    
                     <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </form>
             </div>

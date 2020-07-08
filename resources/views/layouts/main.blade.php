@@ -26,13 +26,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{url('/pertanyaan')}}">Pertanyaan <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{url('/jawaban')}}">Jawaban <span class="sr-only">(current)</span></a>
-            </li>
         </div>
       </div>
     </nav>
-
     @yield('container')
 
     <!-- Optional JavaScript -->

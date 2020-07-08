@@ -15,11 +15,9 @@ class CreateJawabanTable extends Migration
     {
         Schema::create('jawaban', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('pertanyaan_id');
-            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
-            $table->string('description');
-            $table->timestamps();
+            $table->string('answer');
         });
+        
     }
 
     /**
@@ -29,6 +27,8 @@ class CreateJawabanTable extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('jawaban');
+        
     }
 }

@@ -14,11 +14,10 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        //
         $pertanyaan = Pertanyaan::get();
         return view('pertanyaan/index',compact('pertanyaan'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -38,9 +37,14 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Pertanyaan::create($request->all());
+        $request->validate([
+            'theme' => 'required',
+            'description' => 'required'
+        ]);
         
+        // dd($request->all());
+        
+        Pertanyaan::create($request->all());
         return redirect('/pertanyaan')->with('status','Pertanyaan Berhasil Ditambahkan');
     }
 
@@ -50,9 +54,11 @@ class PertanyaanController extends Controller
      * @param  \App\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function show(Pertanyaan $pertanyaan)
-    {
-        //
+    public function show($id)
+    {   
+        $pertanyaan = Pertanyaan::find($id);
+        $pertanyaan1 = Pertanyaan::find($id)->jawaban;
+        return view('/pertanyaan/show',['pertanyaan'=>$pertanyaan,'pertanyaan1'=>$pertanyaan1]);
     }
 
     /**
@@ -76,6 +82,7 @@ class PertanyaanController extends Controller
     public function update(Request $request, Pertanyaan $pertanyaan)
     {
         //
+        
     }
 
     /**

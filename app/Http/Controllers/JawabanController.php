@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\Pertanyaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JawabanController extends Controller
 {
@@ -12,9 +14,11 @@ class JawabanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $pertanyaan = Pertanyaan::find($id);
+        $pertanyaan1 = Pertanyaan::find($id)->jawaban;
+        return view('/jawaban/index',['pertanyaan'=>$pertanyaan,'pertanyaan1'=>$pertanyaan1]);
     }
 
     /**
@@ -22,9 +26,11 @@ class JawabanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $pertanyaan = Pertanyaan::find($id);
+        return view('/jawaban/create',compact('pertanyaan'));
     }
 
     /**
@@ -33,9 +39,22 @@ class JawabanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store($id, Request $request)
+    {  
+        $request->validate([
+            'answer' => 'required'
+        ]);
+
+        $jawaban = Jawaban::create([
+           'answer' => $request->answer,
+           'pertanyaan_id' => $id 
+        ]);
+
+        $pertanyaan = Pertanyaan::find($id);
+        $pertanyaan1 = Pertanyaan::find($id)->jawaban;
+        
+        return view('/jawaban/index',compact('jawaban','pertanyaan','pertanyaan1'))
+        ->with('status','Jawaban berhasil ditambahkan');
     }
 
     /**
@@ -46,7 +65,7 @@ class JawabanController extends Controller
      */
     public function show(Jawaban $jawaban)
     {
-        //
+        
     }
 
     /**
@@ -80,6 +99,7 @@ class JawabanController extends Controller
      */
     public function destroy(Jawaban $jawaban)
     {
-        //
+        Jawaban::destroy($jawaban->id);
+        return redirect('/pertanyaan')->with('status','Data berhasil dihapus');
     }
 }

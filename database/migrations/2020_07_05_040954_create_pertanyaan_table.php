@@ -15,7 +15,7 @@ class CreatePertanyaanTable extends Migration
     {
         Schema::create('pertanyaan', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('theme');
             $table->string('description');
             $table->timestamps();
         });
